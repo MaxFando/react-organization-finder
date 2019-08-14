@@ -1,0 +1,13 @@
+.helper {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  align-items: center;
+
+  &__text {
+    color: #777777;
+    width: 315px;
+    font-family: Verdana;
+    line-height: 140%;
+  }
+}

@@ -1,0 +1,17 @@
+.navbar {
+  display: inline-grid;
+  grid-template-columns: 13rem 17rem;
+  list-style-type: none;
+
+  &__item {
+    color: #b9b9b9;
+    padding: 8px 24px 11px 24px;
+
+    &_active {
+      border-top: 2px solid #f50634;
+      background-color: #ffffff;
+      color: #000000;
+      font-weight: 700;
+    }
+  }
+}

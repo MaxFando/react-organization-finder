@@ -1,9 +1,12 @@
 import React from "react";
+import logo from "./logo.svg";
 
-const Header: React.FC = () => {
+import "./header.scss";
+
+const Header = () => {
   return (
     <div className="header">
-      <h2>Header</h2>
+      <img src={logo} alt="" />
     </div>
   );
 };

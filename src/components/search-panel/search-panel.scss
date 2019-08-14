@@ -1,0 +1,63 @@
+.react-autosuggest {
+  &__container {
+    // position: relative;
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-family: Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+
+    &--focused {
+      outline: none;
+      border: 1px solid #fae29f;
+    }
+  }
+
+  &__suggestions {
+    &-container {
+      display: none;
+
+      &--open {
+        padding: 17px 0;
+        position: relative;
+        bottom: 2px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border-right: 1px solid #e5e5e5;
+        border-left: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #fff;
+        font-weight: 300;
+        font-size: 16px;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        z-index: 2;
+      }
+    }
+
+    &-list {
+      list-style-type: none;
+    }
+  }
+
+  &__suggestion {
+    cursor: pointer;
+    padding: 10px 20px;
+
+    &--highlighted {
+      background-color: #f8f8f8;
+    }
+  }
+}
+
+.label {
+  line-height: 26px;
+}
