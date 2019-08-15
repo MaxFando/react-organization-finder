@@ -1,8 +1,16 @@
 .main {
   justify-self: center;
+  width: 736px;
+  padding: 20px;
 
   .label {
     margin-top: 56px;
     margin-bottom: 32px;
+  }
+
+  .rectangle {
+    background-color: #ffffff;
+    padding: 32px 24px;
+    min-height: 504px;
   }
 }

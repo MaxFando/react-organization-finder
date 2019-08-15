@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Autosuggest from "react-autosuggest";
 import Suggestion from "../suggestion";
-import "./search-panel.scss";
-import DaDataService from "../../services/dadata-service";
 
-const service = new DaDataService();
+import "./search-panel.scss";
 
 const getSuggestionValue = suggestion => suggestion.value;
 const renderSuggestion = suggestion => <Suggestion suggestion={suggestion} />;
@@ -19,20 +17,14 @@ const getSuggestions = (value, { suggestions }) => {
       );
 };
 
-const SearchPanel = ({ onSearch, onNotSearch }) => {
+const SearchPanel = ({
+  organizations,
+  onSearch,
+  onNotSearch,
+  selectSuggestion
+}) => {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [organizations, setOrganizations] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await service.getOrganizations();
-
-      setOrganizations(response);
-    }
-
-    fetchData();
-  }, []);
 
   const onChange = (event, { newValue }) => {
     setValue(newValue);
@@ -46,10 +38,9 @@ const SearchPanel = ({ onSearch, onNotSearch }) => {
     setSuggestions([]);
   };
 
-  const onSuggestionSelected = (
-    event,
-    { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
-  ) => {};
+  const onSuggestionSelected = (event, { suggestion }) => {
+    selectSuggestion(suggestion);
+  };
 
   useEffect(() => {
     return value === "" ? onNotSearch() : onSearch();
@@ -70,6 +61,7 @@ const SearchPanel = ({ onSearch, onNotSearch }) => {
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
+        onSuggestionSelected={onSuggestionSelected}
         inputProps={inputProps}
       />
     </div>
