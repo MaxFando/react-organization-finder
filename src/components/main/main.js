@@ -42,7 +42,7 @@ const Main = () => {
 
   const onItemSave = () => {
     setRows(rows => {
-      rows[suggestion.value] = suggestion;
+      rows[suggestion.data.inn] = suggestion;
 
       return rows;
     });
@@ -84,13 +84,16 @@ const Main = () => {
         selectSuggestion={selectSuggestion}
       />
     ) : (
-      <OrganizationsList rows={Object.values} onDelete={onDelete} />
+      <OrganizationsList rows={Object.values(rows)} onDelete={onDelete} />
     );
 
   return (
     <div className="main">
       <h1 className="label">Мои организации</h1>
-      <Navbar onViewSelected={onViewSelected} itemsCount={rows.length} />
+      <Navbar
+        onViewSelected={onViewSelected}
+        itemsCount={Object.keys(rows).length}
+      />
       <div className="rectangle">
         {content}
         {detail}

@@ -26,7 +26,7 @@ const OrganizationsList = ({ rows, onDelete }) => {
   return <ul className="organizations-list">{Object.values(content)}</ul>;
 };
 
-const List = ({ name, inn, kpp, orgn, address, gen, onDelete }) => {
+const List = ({ name, inn, kpp, orgn, address, gen, onDelete, key }) => {
   const [more, setMore] = useState(false);
 
   const onMoreClick = e => {
@@ -53,7 +53,7 @@ const List = ({ name, inn, kpp, orgn, address, gen, onDelete }) => {
   const toggleLabel = more ? "подробнее" : "скрыть подробности";
 
   return (
-    <li key={inn} className="organizations-list__item" data-key={inn}>
+    <li key={key} className="organizations-list__item" data-key={inn}>
       <section className="organizations-list__section">
         <h2 className="organizations-list__item-label">{name}</h2>
         <div className="organizations-list__item-details">

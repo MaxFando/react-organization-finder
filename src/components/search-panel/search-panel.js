@@ -13,7 +13,12 @@ const getSuggestions = (value, { suggestions }) => {
   return inputLength === 0
     ? []
     : suggestions.filter(
-        org => org.value.toLowerCase().slice(0, inputLength) === inputValue
+        org =>
+          org.value.toLowerCase().includes(inputValue.toLowerCase()) ||
+          org.data.inn.toLowerCase().includes(inputValue.toLowerCase()) ||
+          org.data.address.value
+            .toLowerCase()
+            .includes(inputValue.toLowerCase())
       );
 };
 
