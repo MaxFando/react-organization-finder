@@ -1,11 +1,13 @@
 *:focus {
   outline: none;
 }
+
 .organizations-list {
   list-style-type: none;
 
   &__section_closed {
     height: 60px;
+    line-height: 25px;
   }
 
   &__item {
@@ -14,20 +16,14 @@
     border-radius: 3px;
     padding: 1em;
     overflow-y: hidden;
-    max-height: 200px;
-
+    font-size: 12px;
     display: grid;
     grid-template-columns: 6fr 120px;
     grid-gap: 5px;
     margin-bottom: 20px;
 
-    // transition-property: all;
-    // transition-duration: 0.5s;
-    // transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-
     &-details {
       font-size: 12px;
-      line-height: 20px;
       margin-top: 10px;
 
       span {

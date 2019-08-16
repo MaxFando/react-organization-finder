@@ -1,43 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import "./organizations-list.scss";
 
 import trash from "./trash.svg";
 import arrow from "./arrow.svg";
 
-const OrganizationsList = ({ rows }) => {
-  const [more, setMore] = useState(false);
-  const [section, setSection] = useState("organizations-list__section");
-
-  const onMoreClick = e => {
-    setMore(!more);
-    more
-      ? setSection("organizations-list__section")
-      : setSection(
-          "organizations-list__section organizations-list__section_closed"
-        );
-  };
-
-  const toggleLabel = more ? "подробнее" : "скрыть подробности";
-  const toggleClass = more ? "more__img" : "more__img more_img_open";
-  const itemClass = !more
-    ? "organizations-list__item"
-    : "organizations-list__item organizations-list__item_closed";
-
+const OrganizationsList = ({ rows, onDelete }) => {
   const content = rows.reduce((acc, row) => {
     acc[row.value] = (
       <List
+        key={row.data.inn}
         name={row.value}
         inn={row.data.inn}
         kpp={row.data.kpp}
         ogrn={row.data.ogrn}
         gen={row.data.management.name}
         address={row.data.address.value}
-        toggleLabel={toggleLabel}
-        toggleClass={toggleClass}
-        itemClass={itemClass}
-        section={section}
-        onMoreClick={onMoreClick}
+        onDelete={onDelete}
       />
     );
 
@@ -47,22 +26,35 @@ const OrganizationsList = ({ rows }) => {
   return <ul className="organizations-list">{Object.values(content)}</ul>;
 };
 
-const List = ({
-  name,
-  inn,
-  kpp,
-  orgn,
-  address,
-  gen,
-  toggleClass,
-  toggleLabel,
-  itemClass,
-  section,
-  onMoreClick
-}) => {
+const List = ({ name, inn, kpp, orgn, address, gen, onDelete }) => {
+  const [more, setMore] = useState(false);
+
+  const onMoreClick = e => {
+    setMore(!more);
+    const button =
+      e.target === "BUTTON" ? e.target : e.target.closest("button");
+
+    const item = button.closest(".organizations-list__item");
+    const arrow = item.querySelector(".more__img");
+    const section = item.querySelector(".organizations-list__section");
+
+    arrow.classList.toggle("more_img_open");
+    item.classList.toggle("organizations-list__item_closed");
+    section.classList.toggle("organizations-list__section_closed");
+  };
+
+  const handleDelete = e => {
+    const item = e.target.closest(".organizations-list__item");
+    const inn = item.dataset.key;
+
+    onDelete(inn);
+  };
+
+  const toggleLabel = more ? "подробнее" : "скрыть подробности";
+
   return (
-    <li key={inn} className={itemClass}>
-      <section className={section}>
+    <li key={inn} className="organizations-list__item" data-key={inn}>
+      <section className="organizations-list__section">
         <h2 className="organizations-list__item-label">{name}</h2>
         <div className="organizations-list__item-details">
           <p>
@@ -83,11 +75,12 @@ const List = ({
         </div>
       </section>
       <aside className="organizations-list__item-actions">
-        <button className="trash">
-          <img src={trash} alt="" />
+        <button className="trash" onClick={handleDelete}>
+          <img src={trash} alt="trash" />
         </button>
         <button className="more" onClick={onMoreClick}>
-          <span>{toggleLabel}</span> <img className={toggleClass} src={arrow} />
+          <span>{toggleLabel}</span>{" "}
+          <img className="more__img" src={arrow} alt="arrow" />
         </button>
       </aside>
     </li>

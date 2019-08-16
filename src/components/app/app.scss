@@ -5,8 +5,8 @@
 
 .app {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  width: 100vw;
   display: grid;
+  overflow: hidden;
   background-color: #f8f8f8;
   grid-template-rows: 80px 1fr;
 }

@@ -41,12 +41,11 @@ const Main = () => {
   };
 
   const onItemSave = () => {
-    console.log(rows);
     setRows(rows => {
-      rows.push(suggestion);
+      rows[suggestion.value] = suggestion;
+
       return rows;
     });
-    console.log(rows);
   };
 
   const selectSuggestion = item => {
@@ -54,7 +53,13 @@ const Main = () => {
     setSuggestion(item);
   };
 
-  const onDelete = () => {};
+  const onDelete = inn => {
+    setRows(rows => {
+      delete rows[inn];
+
+      return rows;
+    });
+  };
 
   const helper = isNotSearching && view === "searching" ? <Helper /> : null;
   const detail =
@@ -67,6 +72,7 @@ const Main = () => {
         gen={suggestion.data.management.name}
         address={suggestion.data.address.value}
         onItemSave={onItemSave}
+        a
       />
     ) : null;
   const content =
@@ -78,7 +84,7 @@ const Main = () => {
         selectSuggestion={selectSuggestion}
       />
     ) : (
-      <OrganizationsList rows={rows} />
+      <OrganizationsList rows={Object.values} onDelete={onDelete} />
     );
 
   return (
